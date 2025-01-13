@@ -1,17 +1,53 @@
 import '../styles/components/menu-overview.css'
 
 import { useState, useEffect } from 'react'
+import { MenuItemData } from '../utils/types'
+import MenuItem from './menu-item'
 
-interface MenuItem {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    image: string;
-}
+
+//========================================================================================================
+const sampleMenuItems: MenuItemData[] = [
+    {
+        id: "1",
+        name: "Classic Burger",
+        price: 12.99,
+        description: "Hand-pressed beef patty with lettuce, tomato, onion, and our special sauce",
+        image: "/api/placeholder/" 
+    },
+    {
+        id: "2",
+        name: "Margherita Pizza",
+        price: 15.99,
+        description: "Fresh mozzarella, tomatoes, and basil on our house-made crust",
+        image: "/api/placeholder/" 
+    },
+    {
+        id: "3",
+        name: "Caesar Salad",
+        price: 9.99,
+        description: "Crisp romaine lettuce, parmesan cheese, croutons, and Caesar dressing",
+        image: "/api/placeholder/" 
+    },
+    {
+        id: "4",
+        name: "Grilled Salmon",
+        price: 24.99,
+        description: "Fresh Atlantic salmon with seasonal vegetables and lemon butter sauce",
+        image: "/api/placeholder/" 
+    },
+    {
+        id: "4",
+        name: "Grilled Salmon",
+        price: 24.99,
+        description: "Fresh Atlantic salmon with seasonal vegetables and lemon butter sauce",
+        image: "/api/placeholder/" 
+    }
+];
+//========================================================================================================
+
 
 const MenuOverview = () => {
-    const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+    const [menuItems, setMenuItems] = useState<MenuItemData[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -19,8 +55,14 @@ const MenuOverview = () => {
         async function loadMenuItems() {
             try {
                 setIsLoading(true);
-                const items = await fetchMenuItems();
-                setMenuItems(items);
+
+                // database fetch uncomment
+                // const items = await fetchMenuItems();
+                // setMenuItems(items);
+
+                // hard coded examples
+                setMenuItems(sampleMenuItems);
+
                 setError(null);
             } 
             
@@ -68,17 +110,3 @@ const MenuOverview = () => {
 };
 
 export default MenuOverview;
-
-function MenuItem({ item }: { item: MenuItem }) {
-    return (
-        <div className="menuItem">
-            <img src={item.image} alt={item.name} className="menuItemImage" />
-            <div className="menuItemDetails">
-                <h3>{item.name}</h3>
-
-                <p className="menuItemDescription">{item.description}</p>
-                <p className="menuItemPrice">${item.price.toFixed(2)}</p>
-            </div>
-        </div>
-    )
-}
