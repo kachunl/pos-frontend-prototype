@@ -1,0 +1,81 @@
+.menuOverview {
+    padding: 24px;
+}
+  
+.menuHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+  
+.menuHeader h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+  
+.editButton {
+    padding: 8px 16px;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+  
+.menuGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 24px;
+}
+  
+.menuItem {
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    overflow: hidden;
+}
+  
+.menuItemImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+  
+.menuItemDetails {
+    padding: 16px;
+}
+  
+.menuItemDetails h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+  
+.menuItemDescription {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+  
+.menuItemPrice {
+    font-size: 16px;
+    font-weight: 600;
+}
+  
+.emptyState, .loadingState, .errorState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+  
+.emptyState p, .loadingState p, .errorState p {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+  
+.errorState p {
+    color: #d32f2f;
+}
