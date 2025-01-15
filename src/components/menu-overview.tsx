@@ -1,9 +1,9 @@
 import '../styles/components/menu-overview.css'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { MenuItemData } from '../utils/types'
+import AddMenuItem from './add-menu-item'
 import MenuItem from './menu-item'
-
 
 //========================================================================================================
 const sampleMenuItems: MenuItemData[] = [
@@ -45,67 +45,67 @@ const sampleMenuItems: MenuItemData[] = [
 ];
 //========================================================================================================
 
-
 const MenuOverview = () => {
-    const [menuItems, setMenuItems] = useState<MenuItemData[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [menuItems, setMenuItems] = useState<MenuItemData[]>(sampleMenuItems);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingItemId, setEditingItemId] = useState<string | null>(null);
 
-    useEffect(() => {
-        async function loadMenuItems() {
-            try {
-                setIsLoading(true);
+    const handleRemoveItem = (id: string) => {
+        setMenuItems(menuItems.filter(item => item.id !== id));
+    };
 
-                // database fetch uncomment
-                // const items = await fetchMenuItems();
-                // setMenuItems(items);
+    const handleAddItem = (newItem: MenuItemData) => {
+        setMenuItems([...menuItems, newItem]);
+    };
 
-                // hard coded examples
-                setMenuItems(sampleMenuItems);
-
-                setError(null);
-            } 
-            
-            catch (err) {
-                setError("Failed to load menu items. Please try again later.");
-            } 
-            
-            finally {
-                setIsLoading(false);
-            }
-        }
-
-        loadMenuItems();
-    }, []);
+    const handleEditItem = (editedItem: MenuItemData) => {
+        setMenuItems(menuItems.map(item => item.id === editedItem.id ? editedItem : item));
+        setEditingItemId(null);
+    };
 
     return (
         <div className="menuOverview">
-
             <div className="menuHeader">
                 <h2>Menu Overview</h2>
-                <button className="editButton">Edit Menu</button>
+                <button className="editButton" onClick={() => setIsEditing(!isEditing)}>
+                    {isEditing ? "Done" : "Edit Menu"}
+                </button>
             </div>
 
-            {isLoading ? (
-                <div className="loadingState">
-                    <p>Loading menu items...</p>
-                </div>
-            ) : error ? (
-                <div className="errorState">
-                    <p>{error}</p>
-                </div>
-            ) : menuItems.length === 0 ? (
-                <div className="emptyState">
-                    <p>Your menu is empty. Add your first item to get started.</p>
-                </div>
-            ) : (
-                <div className="menuGrid">
+            <div className="menuGrid">
                 {menuItems.map((item) => (
-                    <MenuItem key={item.id} item={item} />
+                    <MenuItem 
+                        key={item.id} 
+                        item={item} 
+                        isEditing={isEditing}
+                        onEdit={() => setEditingItemId(item.id)}
+                        onRemove={() => handleRemoveItem(item.id)}
+                    />
                 ))}
-                </div>
+
+                {isEditing && (
+                    <div className="addMenuItem">
+                        <button onClick={() => setEditingItemId("new")}>+</button>
+                    </div>
+                )}
+            </div>
+
+            {editingItemId && (
+                <AddMenuItem 
+                    onSubmit={(newItem) => {
+                        if (editingItemId === "new") {
+                            handleAddItem(newItem);
+                        } 
+
+                        else {
+                            handleEditItem({ ...newItem, id: editingItemId });
+                        }
+                        setEditingItemId(null);
+                    }}
+                    onCancel={() => setEditingItemId(null)}
+                    initialItem={editingItemId !== "new" ? menuItems.find(item => item.id === editingItemId) : undefined}
+                />
             )}
-            
         </div>
     )
 };
