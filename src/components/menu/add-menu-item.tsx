@@ -3,6 +3,7 @@ import '../../styles/components/menu/add-menu-item.css'
 import { useState, useEffect } from 'react'
 import { MenuItemData } from '../../utils/types'
 import { AddMenuItemProps } from '../../utils/types'
+import { X } from 'lucide-react'
 
 const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
     const [name, setName] = useState(initialItem?.name || "");
@@ -33,61 +34,74 @@ const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form">
-            <div className="formGroup">
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-            </div>
-
-            <div className="formGroup">
-                <label htmlFor="price">Price</label>
-                <input
-                    type="number"
-                    id="price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    step="0.01"
-                    required
-                />
-            </div>
-            
-            <div className="formGroup">
-                <label htmlFor="description">Description</label>
-                <textarea
-                    id="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                />
-            </div>
-
-            <div className="formGroup">
-                <label htmlFor="image">Image URL</label>
-                <input
-                    type="text"
-                    id="image"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                />
-            </div>
-
-            <div className="buttonGroup">
-                <button type="submit" className="submitButton">
-                    {initialItem ? 'Update Item' : 'Add Item'}
-                </button>
-
-                <button type="button" onClick={onCancel} className="cancelButton">
-                    Cancel
+        <div>
+            <div className="header">
+                <h3 className="title">{initialItem ? 'Edit Menu Item' : 'Add Menu Item'}</h3>
+                <button onClick={onCancel} className="closeButton">
+                    <X size={20} />
                 </button>
             </div>
-            
-        </form>
+
+            <form onSubmit={handleSubmit} className="form">
+                <div className="formGroup">
+                    <label htmlFor="name" className="label">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="input"
+                    />
+                </div>
+
+                <div className="formGroup">
+                    <label htmlFor="price" className="label">Price</label>
+                    <input
+                        type="number"
+                        id="price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        step="0.01"
+                        required
+                        className="input"
+                    />
+                </div>
+
+                <div className="formGroup">
+                    <label htmlFor="description" className="label">Description</label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                        className="textarea"
+                    />
+                </div>
+
+                <div className="formGroup">
+                    <label htmlFor="image" className="label">Image URL</label>
+                    <input
+                        type="text"
+                        id="image"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
+                        className="input"
+                    />
+                </div>
+
+                <div className="buttonGroup">
+                    <button type="submit" className={`${"button"} ${"submitButton"}`}>
+                        {initialItem ? 'Save Changes' : 'Add Item'}
+                    </button>
+
+                    <button type="button" onClick={onCancel} className={`${"button"} ${"cancelButton"}`}>
+                        Cancel
+                    </button>
+                </div>
+
+            </form>
+        </div>
     )
 };
 
