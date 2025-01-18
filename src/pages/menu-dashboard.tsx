@@ -1,7 +1,7 @@
 import '../styles/pages/menu-dashboard.css'
 
-import MenuHeader from '../components/menu-header'
-import MenuOverview from '../components/menu-overview'
+import MenuHeader from '../components/menu/menu-header'
+import MenuOverview from '../components/menu/menu-overview'
 
 const MenuDashboard = () => {
     return (

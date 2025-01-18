@@ -1,8 +1,8 @@
-import '../styles/components/add-menu-item.css'
+import '../../styles/components/menu/add-menu-item.css'
 
 import { useState, useEffect } from 'react'
-import { MenuItemData } from '../utils/types'
-import { AddMenuItemProps } from '../utils/types'
+import { MenuItemData } from '../../utils/types'
+import { AddMenuItemProps } from '../../utils/types'
 
 const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
     const [name, setName] = useState(initialItem?.name || "");

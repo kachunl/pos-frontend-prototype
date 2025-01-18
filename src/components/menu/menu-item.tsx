@@ -1,4 +1,4 @@
-import { MenuItemData } from '../utils/types'
+import { MenuItemData } from '../../utils/types'
 
 const MenuItem = ({ item, isEditing, onEdit, onRemove }: { 
         item: MenuItemData; 

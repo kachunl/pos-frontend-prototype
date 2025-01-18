@@ -1,7 +1,7 @@
-import '../styles/components/menu-overview.css'
+import '../../styles/components/menu/menu-overview.css'
 
 import { useState } from 'react'
-import { MenuItemData } from '../utils/types'
+import { MenuItemData } from '../../utils/types'
 import AddMenuItem from './add-menu-item'
 import MenuItem from './menu-item'
 

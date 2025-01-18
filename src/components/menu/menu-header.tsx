@@ -1,4 +1,4 @@
-import '../styles/components/menu-header.css'
+import '../../styles/components/menu/menu-header.css'
 
 const MenuHeader = () => {
     return (

@@ -1,7 +1,7 @@
-import '../styles/components/edit-menu.css'
+import '../../styles/components/menu/edit-menu.css'
 
 import { useState } from 'react'
-import { EditMenuProps } from '../utils/types'
+import { EditMenuProps } from '../../utils/types'
 import AddMenuItem from './add-menu-item'
 
 const EditMenu = ({ menuItems, onRemoveItem, onAddItem }: EditMenuProps) => {
