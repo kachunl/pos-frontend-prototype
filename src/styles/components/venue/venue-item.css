@@ -1,73 +1,81 @@
-.venue-item-container {
+.venue-item {
     position: relative;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
     overflow: hidden;
-    transition: all 0.2s ease;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.venue-item-container:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transform: translateY(-1px);
+.venue-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.image {
+.venue-item-image {
     width: 100%;
     height: 150px;
     object-fit: cover;
 }
 
-.content {
-    padding: 16px;
+.venue-item-content {
+    padding: 1rem;
 }
 
-.title {
-    font-size: 18px;
+.venue-item-title {
+    font-size: 1.125rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    color: #111827;
+    margin-bottom: 0.25rem;
 }
 
-.address {
-    font-size: 14px;
-    color: #666;
+.venue-item-address {
+    font-size: 0.875rem;
+    color: #6b7280;
 }
 
-.overlay {
+.venue-item-overlay {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     opacity: 0;
     transition: opacity 0.2s ease;
 }
 
-.container:hover .overlay {
+.venue-item-editing:hover .venue-item-overlay {
     opacity: 1;
 }
 
-.button {
-    margin: 5px;
-    padding: 8px 16px;
+.venue-item-button {
+    padding: 0.5rem 1rem;
     border: none;
-    border-radius: 4px;
-    background-color: white;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: 600;
     transition: background-color 0.2s ease;
 }
 
-.button:hover {
-    background-color: #f0f0f0;
+.venue-item-edit-button {
+    background-color: white;
+    color: #111827;
 }
 
-.removeButton {
-    color: #e53e3e;
+.venue-item-edit-button:hover {
+    background-color: #f3f4f6;
 }
 
-.removeButton:hover {
-    background-color: #fff5f5;
-}  
+.venue-item-remove-button {
+    background-color: white;
+    color: #ef4444;
+}
+
+.venue-item-remove-button:hover {
+    background-color: #fef2f2;
+}

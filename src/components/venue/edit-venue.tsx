@@ -23,15 +23,16 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
     };
 
     return (
-        <div className="container">
-            <div className="header">
-                <h2 className="title">Venues</h2>
-                <button className="editButton" onClick={() => setIsEditing(!isEditing)}>
+        <div className="edit-venue-container">
+            <div className="edit-venue-header">
+                <h2 className="edit-venue-title">Venues</h2>
+                
+                <button className="edit-venue-button" onClick={() => setIsEditing(!isEditing)}>
                     {isEditing ? "Done" : "Edit Venues"}
                 </button>
             </div>
 
-            <div className="venueGrid">
+            <div className="edit-venue-grid">
                 {venues.map((venue) => (
                     <VenueItem 
                         key={venue.id} 
@@ -42,26 +43,24 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
                         onClick={() => onVenueClick(venue)}
                     />
                 ))}
+
                 {isEditing && (
-                    <button className="addVenueButton" onClick={() => setEditingVenueId("new")}>
+                    <button className="edit-venue-add-button" onClick={() => setEditingVenueId("new")}>
                         +
                     </button>
                 )}
             </div>
-
+            
             {editingVenueId && (
-                <div className="modal">
-                    <div className="modalContent">
+                <div className="edit-venue-modal">
+                    <div className="edit-venue-modal-content">
                         <AddVenueItem 
                             onSubmit={(newVenue) => {
                                 if (editingVenueId === "new") {
-                                    onAddVenue(newVenue);
-                                } 
-                                
-                                else {
-                                    onEditVenue({ ...newVenue, id: editingVenueId });
+                                onAddVenue(newVenue);
+                                } else {
+                                onEditVenue({ ...newVenue, id: editingVenueId });
                                 }
-
                                 setEditingVenueId(null);
                             }}
                             onCancel={() => setEditingVenueId(null)}
@@ -78,6 +77,7 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
                 title="Remove Venue"
                 message="Are you sure you want to remove this venue? This action cannot be undone."
             />
+
         </div>
     )
 };

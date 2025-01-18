@@ -9,12 +9,11 @@ const VenueHeader = () => {
                 <button className={`${"venue-header-button"} ${"venue-header-preview-button"}`}>
                     Preview Venues
                 </button>
-
+          
                 <button className={`${"venue-header-button"} ${"venue-header-qr-button"}`}>
                     QR Code
                 </button>
             </div>
-            
         </header>
     )
 };
