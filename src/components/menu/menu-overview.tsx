@@ -64,14 +64,13 @@ const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps)
     return (
         <div className="container">
             <MenuHeader onBackToVenues={onBackToVenues} />
-
-            <h2 className="venue-title">Menu for {venueName}</h2>
             
             <EditMenu
                 menuItems={menuItems}
                 onRemoveItem={handleRemoveItem}
                 onAddItem={handleAddItem}
                 onEditItem={handleEditItem}
+                venueName={venueName}
             />
         </div>
     )

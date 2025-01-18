@@ -12,6 +12,7 @@ export type EditMenuProps = {
     onRemoveItem: (id: string) => void;
     onAddItem: (item: MenuItemData) => void;
     onEditItem: (item: MenuItemData) => void;
+    venueName: string;
 };
 
 export type AddMenuItemProps = {

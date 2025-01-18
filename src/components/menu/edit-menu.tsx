@@ -7,7 +7,7 @@ import AddMenuItem from './add-menu-item'
 import MenuItem from './menu-item'
 import RemoveConfirmModal from '../modal/remove-confirm-modal'
 
-const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem }: EditMenuProps) => {
+const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem, venueName }: EditMenuProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editingItemId, setEditingItemId] = useState<string | null>(null);
     const [removingItemId, setRemovingItemId] = useState<string | null>(null);
@@ -24,12 +24,22 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem }: EditMenuPr
     };
 
     return (
-        <div className="edit-menu-container">
+        <div className="edit-menu">
             <div className="edit-menu-header">
-                <h2 className="edit-menu-title">Menu Items</h2>
+                <h2 className="edit-menu-title">Menu for {venueName}</h2>
+
                 <button onClick={() => setIsEditing(!isEditing)} className="edit-menu-edit-button">
-                    <Pencil size={18} />
-                    {isEditing ? "Done" : "Edit Menu"}
+                    {isEditing ? (
+                        <>
+                            <Pencil size={20} />
+                            Done
+                        </>
+                    ) : (
+                        <>
+                            <Pencil size={20} />
+                            Edit Menu
+                        </>
+                    )}
                 </button>
             </div>
 
@@ -45,37 +55,34 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem }: EditMenuPr
                 ))}
 
                 {isEditing && (
-                <button onClick={() => setEditingItemId("new")} className="edit-menu-add-button">
-                    <Plus size={24} className="edit-menu-add-icon" />
-                    <span className="edit-menu-add-text">Add Menu Item</span>
-                </button>
+                    <button onClick={() => setEditingItemId("new")} className="edit-menu-add-button">
+                        <Plus size={24} />
+                        <span className="edit-menu-add-text">Add Menu Item</span>
+                    </button>
                 )}
             </div>
 
             {editingItemId && (
                 <div className="edit-menu-modal">
-
                     <div className="edit-menu-modal-content">
                         <AddMenuItem
-                        onSubmit={(newItem) => {
-                            if (editingItemId === "new") {
-                                onAddItem(newItem);
-                            }
-
-                            else {
-                                onEditItem(newItem);
-                            }
-
-                            setEditingItemId(null);
-                        }}
-                        onCancel={() => setEditingItemId(null)}
-                        initialItem={editingItemId !== "new" ? menuItems.find(item => item.id === editingItemId) : undefined}
+                            onSubmit={(newItem) => {
+                                if (editingItemId === "new") {
+                                    onAddItem(newItem);
+                                } 
+                                
+                                else {
+                                    onEditItem(newItem);
+                                }
+                                
+                                setEditingItemId(null);
+                            }}
+                            onCancel={() => setEditingItemId(null)}
+                            initialItem={editingItemId !== "new" ? menuItems.find(item => item.id === editingItemId) : undefined}
                         />
-
                     </div>
                 </div>
             )}
-            
             <RemoveConfirmModal
                 isOpen={removingItemId !== null}
                 onConfirm={confirmRemove}

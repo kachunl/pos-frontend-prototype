@@ -5,22 +5,22 @@ import { ArrowLeft, QrCode, Eye } from 'lucide-react'
   
 const MenuHeader = ({ onBackToVenues }: MenuHeaderProps) => {
     return (
-        <header className="header">
-            <h1 className="title">Menu Manager</h1>
-
-            <div className="buttonGroup">
-                <button className={`${"button"} ${"previewButton"}`}>
-                    <Eye size={18} />
+        <header className="menu-header">
+            <h1 className="menu-header-title">Menu Manager</h1>
+            
+            <div className="menu-header-buttons">
+                <button className="menu-header-preview">
+                    <Eye size={20} />
                     Preview Menu
                 </button>
 
-                <button className={`${"button"} ${"qrButton"}`}>
-                    <QrCode size={18} />
+                <button className="menu-header-qr">
+                    <QrCode size={20} />
                     QR Code
                 </button>
 
-                <button onClick={onBackToVenues} className={`${"button"} ${"backButton"}`}>
-                    <ArrowLeft size={18} />
+                <button onClick={onBackToVenues} className="menu-header-back">
+                    <ArrowLeft size={20} />
                     Venues
                 </button>
             </div>
