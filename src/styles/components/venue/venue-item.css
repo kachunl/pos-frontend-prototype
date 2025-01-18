@@ -1,0 +1,73 @@
+.venue-item-container {
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.venue-item-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+}
+
+.image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.content {
+    padding: 16px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.address {
+    font-size: 14px;
+    color: #666;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+}
+
+.button {
+    margin: 5px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background-color: #f0f0f0;
+}
+
+.removeButton {
+    color: #e53e3e;
+}
+
+.removeButton:hover {
+    background-color: #fff5f5;
+}  

@@ -1,0 +1,47 @@
+.add-venue-item-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.add-venue-item-form-group {
+    margin-bottom: 1rem;
+}
+
+.add-venue-item-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.add-venue-item-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+}
+
+.add-venue-item-button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.add-venue-item-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.add-venue-item-submit-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.add-venue-item-cancel-button {
+    background-color: #f44336;
+    color: white;
+}  

@@ -1,69 +1,87 @@
-.editMenu {
+.edit-menu-container {
+    margin-top: 2rem;
+}
+
+.edit-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.edit-menu-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.edit-menu-edit-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-menu-edit-button:hover {
+    background-color: #2563eb;
+}
+
+.edit-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.edit-menu-add-button {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    border: 2px dashed #e5e7eb;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
-  
-.menuItemList {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+
+.edit-menu-add-button:hover {
+    border-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
 }
-  
-.menuItemEdit {
+
+.edit-menu-add-icon {
+    font-size: 1.5rem;
+    color: #9ca3af;
+}
+
+.edit-menu-add-text {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.edit-menu-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    justify-content: center;
+    padding: 1.5rem;
 }
-  
-.menuItemImage {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-  
-.menuItemDetails {
-    flex: 1;
-}
-  
-.menuItemDetails h3 {
-    font-size: 18px;
-    margin-bottom: 4px;
-}
-  
-.menuItemDescription {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 4px;
-}
-  
-.menuItemPrice {
-    font-size: 16px;
-    font-weight: 600;
-    color: #666;
-}
-  
-.removeButton {
-    padding: 8px 16px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-  
-.addButton {
-    padding: 12px 24px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    align-self: flex-start;
-    font-size: 16px;
-}
+
+.edit-menu-modal-content {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 500px;
+}  
