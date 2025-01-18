@@ -7,27 +7,28 @@ const RemoveConfirmModal = ({ isOpen, onConfirm, onCancel, title, message }: Rem
     if (!isOpen) return null;
 
     return (
-        <div className="overlay">
-            <div className="modal">
-                <div className="header">
-                  <h3 className="title">{title}</h3>
-                  <button onClick={onCancel} className="closeButton">
-                    <X size={20} />
-                  </button>
-                </div>
-
-                <p className="message">{message}</p>
+        <div className="confirm-modal-overlay">
+            <div className="confirm-modal">
                 
-                <div className="buttonGroup">
-                  <button onClick={onCancel} className={`${"button"} ${"cancelButton"}`}>
-                      Cancel
-                  </button>
-
-                  <button onClick={onConfirm} className={`${"button"} ${"confirmButton"}`}>
-                      Remove
-                  </button>
+                <div className="confirm-modal-header">
+                    <h3 className="confirm-modal-title">{title}</h3>
+                    <button onClick={onCancel} className="confirm-modal-close-button">
+                        <X size={20} />
+                    </button>
                 </div>
-            
+
+                <p className="confirm-modal-message">{message}</p>
+                
+                <div className="confirm-modal-button-group">
+                    <button onClick={onCancel} className={`${"confirm-modal-button"} ${"confirm-modal-cancel-button"}`}>
+                        Cancel
+                    </button>
+
+                    <button onClick={onConfirm} className={`${"confirm-modal-button"} ${"confirm-modal-confirm-button"}`}>
+                        Remove
+                    </button>
+                </div>
+                
             </div>
         </div>
     )
