@@ -2,8 +2,9 @@ import '../../styles/components/menu/menu-overview.css'
 
 import { useState } from 'react'
 import { MenuItemData } from '../../utils/types'
-import AddMenuItem from './add-menu-item'
-import MenuItem from './menu-item'
+import { MenuOverviewProps } from '../../utils/types'
+import EditMenu from './edit-menu'
+import MenuHeader from './menu-header'
 
 //========================================================================================================
 const sampleMenuItems: MenuItemData[] = [
@@ -45,67 +46,33 @@ const sampleMenuItems: MenuItemData[] = [
 ];
 //========================================================================================================
 
-const MenuOverview = () => {
+const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps) => {
     const [menuItems, setMenuItems] = useState<MenuItemData[]>(sampleMenuItems);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editingItemId, setEditingItemId] = useState<string | null>(null);
-
+      
     const handleRemoveItem = (id: string) => {
         setMenuItems(menuItems.filter(item => item.id !== id));
     };
-
+    
     const handleAddItem = (newItem: MenuItemData) => {
         setMenuItems([...menuItems, newItem]);
     };
-
+    
     const handleEditItem = (editedItem: MenuItemData) => {
         setMenuItems(menuItems.map(item => item.id === editedItem.id ? editedItem : item));
-        setEditingItemId(null);
     };
-
+    
     return (
-        <div className="menuOverview">
-            <div className="menuHeader">
-                <h2>Menu Overview</h2>
-                <button className="editButton" onClick={() => setIsEditing(!isEditing)}>
-                    {isEditing ? "Done" : "Edit Menu"}
-                </button>
-            </div>
+        <div className="container">
+            <MenuHeader onBackToVenues={onBackToVenues} />
 
-            <div className="menuGrid">
-                {menuItems.map((item) => (
-                    <MenuItem 
-                        key={item.id} 
-                        item={item} 
-                        isEditing={isEditing}
-                        onEdit={() => setEditingItemId(item.id)}
-                        onRemove={() => handleRemoveItem(item.id)}
-                    />
-                ))}
-
-                {isEditing && (
-                    <div className="addMenuItem">
-                        <button onClick={() => setEditingItemId("new")}>+</button>
-                    </div>
-                )}
-            </div>
-
-            {editingItemId && (
-                <AddMenuItem 
-                    onSubmit={(newItem) => {
-                        if (editingItemId === "new") {
-                            handleAddItem(newItem);
-                        } 
-
-                        else {
-                            handleEditItem({ ...newItem, id: editingItemId });
-                        }
-                        setEditingItemId(null);
-                    }}
-                    onCancel={() => setEditingItemId(null)}
-                    initialItem={editingItemId !== "new" ? menuItems.find(item => item.id === editingItemId) : undefined}
-                />
-            )}
+            <h2 className="venue-title">Menu for {venueName}</h2>
+            
+            <EditMenu
+                menuItems={menuItems}
+                onRemoveItem={handleRemoveItem}
+                onAddItem={handleAddItem}
+                onEditItem={handleEditItem}
+            />
         </div>
     )
 };

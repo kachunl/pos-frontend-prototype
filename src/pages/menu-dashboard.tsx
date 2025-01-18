@@ -1,19 +1,8 @@
-import '../styles/pages/menu-dashboard.css'
-
-import MenuHeader from '../components/menu/menu-header'
 import MenuOverview from '../components/menu/menu-overview'
+import { MenuDashboardProps } from '../utils/types'
 
-const MenuDashboard = () => {
-    return (
-        <div className="container">
-            <MenuHeader />
-
-            <main className="main">
-                <MenuOverview />
-            </main>
-        
-        </div>
-    )
-};
+const MenuDashboard = ({ venueId, venueName, onBackToVenues }: MenuDashboardProps) => {
+    return <MenuOverview venueId={venueId} venueName={venueName} onBackToVenues={onBackToVenues} />
+}
 
 export default MenuDashboard;

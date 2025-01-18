@@ -1,9 +1,9 @@
-import MenuOverview from './pages/menu-dashboard';
+import VenueDashboard from './pages/venue-dashboard';
 
 function App() {
     return (
         <>
-            <MenuOverview />
+            <VenueDashboard />
         </>
     )
 };

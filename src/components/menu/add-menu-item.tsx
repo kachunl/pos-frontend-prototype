@@ -35,28 +35,28 @@ const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
 
     return (
         <div>
-            <div className="header">
-                <h3 className="title">{initialItem ? 'Edit Menu Item' : 'Add Menu Item'}</h3>
-                <button onClick={onCancel} className="closeButton">
+            <div className="add-menu-item-header">
+                <h3 className="add-menu-item-title">{initialItem ? "Edit Menu Item" : "Add Menu Item"}</h3>
+                <button onClick={onCancel} className="add-menu-item-close-button">
                     <X size={20} />
                 </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="form">
-                <div className="formGroup">
-                    <label htmlFor="name" className="label">Name</label>
+            <form onSubmit={handleSubmit} className="add-menu-item-form">
+                <div className="add-menu-item-form-group">
+                    <label htmlFor="name" className="add-menu-item-label">Name</label>
                     <input
                         type="text"
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
-                        className="input"
+                        className="add-menu-item-input"
                     />
                 </div>
 
-                <div className="formGroup">
-                    <label htmlFor="price" className="label">Price</label>
+                <div className="add-menu-item-form-group">
+                    <label htmlFor="price" className="add-menu-item-label">Price</label>
                     <input
                         type="number"
                         id="price"
@@ -64,38 +64,38 @@ const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
                         onChange={(e) => setPrice(e.target.value)}
                         step="0.01"
                         required
-                        className="input"
+                        className="add-menu-item-input"
                     />
                 </div>
 
-                <div className="formGroup">
-                    <label htmlFor="description" className="label">Description</label>
+                <div className="add-menu-item-form-group">
+                    <label htmlFor="description" className="add-menu-item-label">Description</label>
                     <textarea
                         id="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
-                        className="textarea"
+                        className="add-menu-item-textarea"
                     />
                 </div>
 
-                <div className="formGroup">
-                    <label htmlFor="image" className="label">Image URL</label>
+                <div className="add-menu-item-form-group">
+                    <label htmlFor="image" className="add-menu-item-label">Image URL</label>
                     <input
                         type="text"
                         id="image"
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
-                        className="input"
+                        className="add-menu-item-input"
                     />
                 </div>
 
-                <div className="buttonGroup">
-                    <button type="submit" className={`${"button"} ${"submitButton"}`}>
-                        {initialItem ? 'Save Changes' : 'Add Item'}
+                <div className="add-menu-item-button-group">
+                    <button type="submit" className={`${"add-menu-item-button"} ${"add-menu-item-submit-button"}`}>
+                        {initialItem ? "Save Changes" : "Add Item"}
                     </button>
 
-                    <button type="button" onClick={onCancel} className={`${"button"} ${"cancelButton"}`}>
+                    <button type="button" onClick={onCancel} className={`${"add-menu-item-button"} ${"add-menu-item-cancel-button"}`}>
                         Cancel
                     </button>
                 </div>

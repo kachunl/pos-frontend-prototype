@@ -24,16 +24,16 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem }: EditMenuPr
     };
 
     return (
-        <div className="container">
-            <div className="header">
-                <h2 className="title">Menu Items</h2>
-                <button onClick={() => setIsEditing(!isEditing)} className="editButton">
+        <div className="edit-menu-container">
+            <div className="edit-menu-header">
+                <h2 className="edit-menu-title">Menu Items</h2>
+                <button onClick={() => setIsEditing(!isEditing)} className="edit-menu-edit-button">
                     <Pencil size={18} />
                     {isEditing ? "Done" : "Edit Menu"}
                 </button>
             </div>
 
-            <div className="menuGrid">
+            <div className="edit-menu-grid">
                 {menuItems.map((item) => (
                     <MenuItem
                         key={item.id}
@@ -45,21 +45,22 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem }: EditMenuPr
                 ))}
 
                 {isEditing && (
-                <button onClick={() => setEditingItemId("new")} className="addButton">
-                    <Plus size={24} className="addIcon" />
-                    <span className="addText">Add Menu Item</span>
+                <button onClick={() => setEditingItemId("new")} className="edit-menu-add-button">
+                    <Plus size={24} className="edit-menu-add-icon" />
+                    <span className="edit-menu-add-text">Add Menu Item</span>
                 </button>
                 )}
             </div>
 
             {editingItemId && (
-                <div className="modal">
-                    <div className="modalContent">
+                <div className="edit-menu-modal">
+
+                    <div className="edit-menu-modal-content">
                         <AddMenuItem
                         onSubmit={(newItem) => {
-                            if (editingItemId === 'new') {
+                            if (editingItemId === "new") {
                                 onAddItem(newItem);
-                            } 
+                            }
 
                             else {
                                 onEditItem(newItem);
@@ -70,10 +71,11 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem }: EditMenuPr
                         onCancel={() => setEditingItemId(null)}
                         initialItem={editingItemId !== "new" ? menuItems.find(item => item.id === editingItemId) : undefined}
                         />
+
                     </div>
                 </div>
             )}
-
+            
             <RemoveConfirmModal
                 isOpen={removingItemId !== null}
                 onConfirm={confirmRemove}
@@ -81,7 +83,6 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem }: EditMenuPr
                 title="Remove Menu Item"
                 message="Are you sure you want to remove this menu item? This action cannot be undone."
             />
-            
         </div>
     )
 };
