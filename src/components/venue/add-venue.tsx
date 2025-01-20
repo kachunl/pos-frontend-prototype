@@ -1,38 +1,42 @@
 import '../../styles/components/venue/add-venue.css'
 
 import { useState, useEffect } from 'react'
-import { VenueData } from '../../utils/types';
-import { AddVenueItemProps } from '../../utils/types';
+import { VenueData } from '../../utils/types'
+import { AddVenueItemProps } from '../../utils/types'
 
 const AddVenueItem = ({ onSubmit, onCancel, initialVenue }: AddVenueItemProps) => {
-    const [name, setName] = useState(initialVenue?.name || "");
-    const [address, setAddress] = useState(initialVenue?.address || "");
-    const [image, setImage] = useState(initialVenue?.image || "");
+    const [name, setName] = useState(initialVenue?.name || "")
+    const [description, setDescription] = useState(initialVenue?.description || "")
+    const [isActive, setIsActive] = useState(initialVenue?.is_active ?? true)
+    const [bannerUrl, setBannerUrl] = useState(initialVenue?.banner_url || "")
 
     useEffect(() => {
         if (initialVenue) {
-            setName(initialVenue.name);
-            setAddress(initialVenue.address);
-            setImage(initialVenue.image);
+            setName(initialVenue.name)
+            setDescription(initialVenue.description)
+            setIsActive(initialVenue.is_active)
+            setBannerUrl(initialVenue.banner_url)
         }
-    }, [initialVenue]);
+    }, [initialVenue])
 
     const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        const newVenue: VenueData = {
-            id: initialVenue?.id || Date.now().toString(),
+        e.preventDefault()
+            const newVenue: Omit<VenueData, "id"> = {
             name,
-            address,
-            image: image || "/placeholder",
-        };
-        onSubmit(newVenue);
-    };
+            description,
+            is_active: isActive,
+            banner_url: bannerUrl || "/placeholder",
+        }
 
-    return (
+        onSubmit(newVenue)
+    }
+
+  return (
         <form onSubmit={handleSubmit} className="add-venue-item-form">
             <div className="add-venue-item-form-group">
-                <label htmlFor="name" className="add-venue-item-label">Venue Name</label>
+                <label htmlFor="name" className="add-venue-item-label">
+                    Venue Name
+                </label>
                 <input
                     type="text"
                     id="name"
@@ -44,24 +48,40 @@ const AddVenueItem = ({ onSubmit, onCancel, initialVenue }: AddVenueItemProps) =
             </div>
 
             <div className="add-venue-item-form-group">
-                <label htmlFor="address" className="add-venue-item-label">Address</label>
-                <input
-                    type="text"
-                    id="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                <label htmlFor="description" className="add-venue-item-label">
+                    Description
+                </label>
+                <textarea
+                    id="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     required
-                    className="add-venue-item-input"
+                    className="add-venue-item-textarea"
                 />
             </div>
 
             <div className="add-venue-item-form-group">
-                <label htmlFor="image" className="add-venue-item-label">Image URL</label>
+                <label htmlFor="isActive" className="add-venue-item-label">
+                <input
+                    type="checkbox"
+                    id="isActive"
+                    checked={isActive}
+                    onChange={(e) => setIsActive(e.target.checked)}
+                    className="add-venue-item-checkbox"
+                />
+                    Active
+                </label>
+            </div>
+
+            <div className="add-venue-item-form-group">
+                <label htmlFor="bannerUrl" className="add-venue-item-label">
+                    Banner URL
+                </label>
                 <input
                     type="text"
-                    id="image"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
+                    id="bannerUrl"
+                    value={bannerUrl}
+                    onChange={(e) => setBannerUrl(e.target.value)}
                     className="add-venue-item-input"
                 />
             </div>
@@ -75,7 +95,7 @@ const AddVenueItem = ({ onSubmit, onCancel, initialVenue }: AddVenueItemProps) =
                     Cancel
                 </button>
             </div>
-            
+
         </form>
     )
 };

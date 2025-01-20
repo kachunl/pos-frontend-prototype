@@ -54,25 +54,25 @@ export type MenuDashboardProps = {
 
 // venue
 export type VenueData = {
-    id: string;
+    id: number;
     name: string;
-    address: string;
-    image: string;
+    description: string;
+    is_active: boolean;
+    banner_url: string;
 };
   
 export type AddVenueItemProps = {
-    onSubmit: (venue: VenueData) => void;
+    onSubmit: (venue: Omit<VenueData, "id">) => void
     onCancel: () => void;
     initialVenue?: VenueData;
 };
 
 export type EditVenueProps = {
     venues: VenueData[];
-    onRemoveVenue: (id: string) => void;
-    onAddVenue: (venue: VenueData) => void;
+    onRemoveVenue: (id: number) => void;
+    onAddVenue: (venue: Omit<VenueData, "id">) => void;
     onEditVenue: (venue: VenueData) => void;
-    // onVenueClick: (id: string) => void;
-    onVenueClick: (venue: VenueData) => void; // Changed to accept VenueData instead of string
+    onVenueClick: (id: number) => void;
 };
 
 export type VenueItemProps = {

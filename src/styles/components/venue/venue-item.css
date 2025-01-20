@@ -23,16 +23,46 @@
     padding: 1rem;
 }
 
+.venue-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
 .venue-item-title {
     font-size: 1.125rem;
     font-weight: 600;
     color: #111827;
-    margin-bottom: 0.25rem;
+    margin: 0;
 }
 
-.venue-item-address {
+.venue-item-status-icon {
+    flex-shrink: 0;
+}
+
+.venue-item-description {
     font-size: 0.875rem;
     color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.venue-item-status {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+}
+
+.venue-item-status-active {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.venue-item-status-inactive {
+    background-color: #fee2e2;
+    color: #991b1b;
 }
 
 .venue-item-overlay {
@@ -78,4 +108,4 @@
 
 .venue-item-remove-button:hover {
     background-color: #fef2f2;
-}
+} 

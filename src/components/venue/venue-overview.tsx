@@ -8,48 +8,54 @@ import VenueHeader from './venue-header'
 
 const sampleVenues: VenueData[] = [
     {
-        id: "1",
+        id: 1,
         name: "Mc Donalds",
-        address: "Rod Laver Arena",
-        image: "/placeholder",
+        description: "Rod Laver Arena",
+        is_active: true,
+        banner_url: "/placeholder",
     },
     {
-        id: "2",
+        id: 2,
         name: "KFC",
-        address: "456 USA",
-        image: "/placeholder",
+        description: "456 USA",
+        is_active: false,
+        banner_url: "/placeholder",
     },
     {
-        id: "3",
+        id: 3,
         name: "Mount Everest",
-        address: "999 Everest Lane",
-        image: "/placeholder",
+        description: "999 Everest Lane",
+        is_active: true,
+        banner_url: "/placeholder",
     },
 ];
 
 const VenueOverview = ({ onVenueSelect }: VenueOverviewProps) => {
-    const [venues, setVenues] = useState<VenueData[]>(sampleVenues);
+    const [venues, setVenues] = useState<VenueData[]>(sampleVenues)
 
-    const handleRemoveVenue = (id: string) => {
-        setVenues(venues.filter(venue => venue.id !== id));
-    };
+    const handleRemoveVenue = (id: number) => {
+        setVenues(venues.filter((venue) => venue.id !== id))
+    }
 
-    const handleAddVenue = (newVenue: VenueData) => {
-        setVenues([...venues, newVenue]);
-    };
+    const handleAddVenue = (newVenue: Omit<VenueData, "id">) => {
+        const newId = Math.max(...venues.map((v) => v.id)) + 1
+        setVenues([...venues, { ...newVenue, id: newId }])
+    }
 
     const handleEditVenue = (editedVenue: VenueData) => {
-        setVenues(venues.map(venue => venue.id === editedVenue.id ? editedVenue : venue));
-    };
+        setVenues(venues.map((venue) => (venue.id === editedVenue.id ? editedVenue : venue)))
+    }
 
-    const handleVenueClick = (venue: VenueData) => {
-        onVenueSelect(venue);
-    };
+    const handleVenueClick = (id: number) => {
+        const venue = venues.find((v) => v.id === id)
+        if (venue) {
+            onVenueSelect(venue)
+        }
+    }
 
     return (
         <div className="venue-overview-container">
             <VenueHeader />
-            
             <EditVenue
                 venues={venues}
                 onRemoveVenue={handleRemoveVenue}
