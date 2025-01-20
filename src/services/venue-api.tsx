@@ -1,23 +1,97 @@
-const BASE_URL = ""
+import { Venue } from "../utils/types";
+
+const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/venues`;
 
 const VenueService = {
-    // change id type for both (check backend)
-    getVenue: async (id: any) => {
-        const response = await fetch(`${BASE_URL}/${id}`);
+    getAllVenues: async (): Promise<Venue[]> => {
+        try {
+            const response = await fetch(`${BASE_URL}`);
 
-        if (!response.ok) throw new Error("Failed to fetch venue");
-        return response.json();
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } 
+        
+        catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to fetch venues: ${error.message}`);
+            }
+
+            throw new Error("An unknown error occurred");
+        }
     },
 
-    deleteVenue: async (id: any) => {
-        const response = await fetch(`${BASE_URL}/${id}`, 
-        {
-            method: "DELETE"
-        });
+    getVenue: async (id: number): Promise<Venue> => {
+        try {
+            const response = await fetch(`${BASE_URL}/${id}`);
 
-        if (!response.ok) throw new Error("Failed to delete venue");
-        return response.json();
-    }
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } 
+        
+        catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to fetch venue: ${error.message}`);
+            }
+
+            throw new Error("An unknown error occurred");
+        }
+    },
+
+    updateVenue: async (id: number, data: Partial<Venue>): Promise<Venue> => {
+        try {
+            const response = await fetch(`${BASE_URL}/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            return await response.json();
+        } 
+        
+        catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to update venue: ${error.message}`);
+            }
+
+            throw new Error("An unknown error occurred");
+        }
+    },
+    
+    deleteVenue: async (id: number): Promise<boolean> => {
+        try {
+            const response = await fetch(`${BASE_URL}/${id}`, 
+            {
+                method: "DELETE"
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            return true;
+        }
+        
+        catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to delete venue: ${error.message}`);
+            }
+
+            throw new Error("An unknown error occurred");
+        }
+    },
+
+    // createVenue
 };
 
 export default VenueService;
