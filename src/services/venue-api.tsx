@@ -11,7 +11,8 @@ const VenueService = {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            return await response.json();
+            const json = await response.json();
+            return json.venues; 
         } 
         
         catch (error) {
