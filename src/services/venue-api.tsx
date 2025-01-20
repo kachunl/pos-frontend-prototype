@@ -1,9 +1,9 @@
-import { Venue } from "../utils/types";
+import { VenueData } from "../utils/types";
 
 const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/venues`;
 
 const VenueService = {
-    getAllVenues: async (): Promise<Venue[]> => {
+    getAllVenues: async (): Promise<VenueData[]> => {
         try {
             const response = await fetch(`${BASE_URL}`);
 
@@ -23,7 +23,7 @@ const VenueService = {
         }
     },
 
-    getVenue: async (id: number): Promise<Venue> => {
+    getVenue: async (id: number): Promise<VenueData> => {
         try {
             const response = await fetch(`${BASE_URL}/${id}`);
 
@@ -42,7 +42,7 @@ const VenueService = {
         }
     },
 
-    updateVenue: async (id: number, data: Partial<Venue>): Promise<Venue> => {
+    updateVenue: async (id: number, data: Partial<VenueData>): Promise<VenueData> => {
         try {
             const response = await fetch(`${BASE_URL}/${id}`, {
                 method: "PATCH",
