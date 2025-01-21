@@ -92,7 +92,32 @@ const VenueService = {
         }
     },
 
-    // createVenue
+    createVenue: async (data: Omit<VenueData, "id">): Promise<VenueData> => {
+        try {
+            const response = await fetch(`${BASE_URL}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            return await response.json();
+        } 
+        
+        catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Failed to create venue: ${error.message}`);
+            }
+    
+            throw new Error("An unknown error occurred");
+        }
+    }
+    
 };
 
 export default VenueService;
