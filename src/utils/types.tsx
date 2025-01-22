@@ -1,10 +1,25 @@
 // menu
 export type MenuItemData = {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    image: string;
+    name: string
+    description: string
+    category: string
+    price: number
+    is_available: boolean
+    image_url: string
+    position: number
+    modifiers: Modifier[]
+};
+
+export type ModifierChoice = {
+    name: string
+    price: number
+};
+  
+export type Modifier = {
+    name: string
+    min_choices: number
+    max_choices: number
+    choices: ModifierChoice[]
 };
 
 export type EditMenuProps = {
@@ -26,6 +41,7 @@ export type MenuItemProps = {
     isEditing: boolean;
     onEdit: () => void;
     onRemove: () => void;
+    onClick: () => void
 };
 
 export type RemoveConfirmModalProps = {
@@ -50,6 +66,16 @@ export type MenuDashboardProps = {
     venueId: number;
     venueName: string;
     onBackToVenues: () => void;
+};
+
+export type UnformattedMenuData = {
+    menu: {
+        id: number;
+        name: string;
+        description: string;
+        is_active: boolean;
+        banner_url?: string;
+    };
 };
 
 // venue

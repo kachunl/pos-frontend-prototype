@@ -9,48 +9,45 @@ import MenuHeader from './menu-header'
 //========================================================================================================
 const sampleMenuItems: MenuItemData[] = [
     {
-        id: "1",
-        name: "Pad Thai",
-        price: 17.99,
-        description: "Pad Thai is a stir-fried rice noodle dish commonly served as a street food in Thailand.",
-        image: "/api/placeholder/" 
+        name: "Pad Krapow (1kg)",
+        description: "Thai classic",
+        category: "rice",
+        price: 1200,
+        is_available: true,
+        image_url: "/placeholder",
+        position: 2,
+        modifiers: [
+            {
+                name: "Spice Level",
+                min_choices: 0,
+                max_choices: 4,
+                choices: [
+                    { name: "Less spice", price: 0 },
+                    { name: "Medium spice", price: 0 },
+                    { name: "More spice", price: 0 },
+                    { name: "Mega spice", price: 1 },
+                ],
+            },
+        ],
     },
     {
-        id: "2",
-        name: "Pad Kra Pao",
-        price: 14.99,
-        description: "A real Thai classic Pad Krapao ( which means basil stir-fry) topped with, or served over, a crispy fried egg with a slightly runny yolk.",
-        image: "/api/placeholder/" 
+        name: "Pink Milk",
+        description: "Pink Sweet Milk",
+        category: "drink",
+        price: 999,
+        is_available: true,
+        image_url: "/placeholder",
+        position: 1,
+        modifiers: [],
     },
-    {
-        id: "3",
-        name: "Tom Yum Kung",
-        price: 19.99,
-        description: "om yum is known for its distinctive hot and sour flavours, with fragrant spices and herbs used abundantly in the broth.",
-        image: "/api/placeholder/" 
-    },
-    {
-        id: "4",
-        name: "Pad See Ew",
-        price: 17.99,
-        description: "Pad See Ew is salty, balanced with a touch of sour and a wonderful chargrilled flavour.",
-        image: "/api/placeholder/" 
-    },
-    {
-        id: "5",
-        name: "Som Tam",
-        price: 19.99,
-        description: "Spicy salad made from shredded unripe papaya.",
-        image: "/api/placeholder/" 
-    }
-];
+]
 //========================================================================================================
 
 const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps) => {
     const [menuItems, setMenuItems] = useState<MenuItemData[]>(sampleMenuItems);
       
-    const handleRemoveItem = (id: string) => {
-        setMenuItems(menuItems.filter(item => item.id !== id));
+    const handleRemoveItem = (name: string) => {
+        setMenuItems(menuItems.filter(item => item.name !== name));
     };
     
     const handleAddItem = (newItem: MenuItemData) => {
@@ -58,7 +55,7 @@ const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps)
     };
     
     const handleEditItem = (editedItem: MenuItemData) => {
-        setMenuItems(menuItems.map(item => item.id === editedItem.id ? editedItem : item));
+        setMenuItems(menuItems.map(item => item.name === editedItem.name ? editedItem : item));
     };
     
     return (
