@@ -1,10 +1,10 @@
 import { VenueData } from "../utils/types";
 import { UnformattedVenueData } from "../utils/types";
 
-const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/venues`;
+const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/items`;
 
-const VenueService = {
-    getAllVenues: async (): Promise<VenueData[]> => {
+const MenuService = {
+    getAllMenuItem: async (): Promise<VenueData[]> => {
         try {
             const response = await fetch(`${BASE_URL}`);
 
@@ -18,14 +18,14 @@ const VenueService = {
         
         catch (error) {
             if (error instanceof Error) {
-                throw new Error(`Failed to fetch venues: ${error.message}`);
+                throw new Error(`Failed to fetch menu items: ${error.message}`);
             }
 
             throw new Error("An unknown error occurred");
         }
     },
 
-    getVenue: async (id: number): Promise<VenueData> => {
+    getMenuItem: async (id: number): Promise<VenueData> => {
         try {
             const response = await fetch(`${BASE_URL}/${id}`);
 
@@ -37,14 +37,14 @@ const VenueService = {
         
         catch (error) {
             if (error instanceof Error) {
-                throw new Error(`Failed to fetch venue: ${error.message}`);
+                throw new Error(`Failed to fetch menu item: ${error.message}`);
             }
 
             throw new Error("An unknown error occurred");
         }
     },
 
-    updateVenue: async (id: number, data: Omit<VenueData, "id">): Promise<UnformattedVenueData> => {
+    updateMenuItem: async (id: number, data: Omit<VenueData, "id">): Promise<UnformattedVenueData> => {
         try {
             const response = await fetch(`${BASE_URL}/${id}`, {
                 method: "PATCH",
@@ -63,14 +63,14 @@ const VenueService = {
         
         catch (error) {
             if (error instanceof Error) {
-                throw new Error(`Failed to update venue: ${error.message}`);
+                throw new Error(`Failed to update menu item: ${error.message}`);
             }
 
             throw new Error("An unknown error occurred");
         }
     },
     
-    deleteVenue: async (id: number): Promise<boolean> => {
+    deleteMenuItem: async (id: number): Promise<boolean> => {
         try {
             const response = await fetch(`${BASE_URL}/${id}`, 
             {
@@ -86,39 +86,12 @@ const VenueService = {
         
         catch (error) {
             if (error instanceof Error) {
-                throw new Error(`Failed to delete venue: ${error.message}`);
+                throw new Error(`Failed to delete menu item: ${error.message}`);
             }
 
             throw new Error("An unknown error occurred");
         }
-    },
-
-    createVenue: async (data: Omit<VenueData, "id">): Promise<UnformattedVenueData> => {
-        try {
-            const response = await fetch(`${BASE_URL}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-    
-            return await response.json();
-        } 
-        
-        catch (error) {
-            if (error instanceof Error) {
-                throw new Error(`Failed to create venue: ${error.message}`);
-            }
-    
-            throw new Error("An unknown error occurred");
-        }
-    }
-    
+    },    
 };
 
-export default VenueService;
+export default MenuService;

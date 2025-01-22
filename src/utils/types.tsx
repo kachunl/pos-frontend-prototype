@@ -41,13 +41,13 @@ export type MenuHeaderProps = {
 };
 
 export type MenuOverviewProps = {
-    venueId: string;
+    venueId: number;
     venueName: string;
     onBackToVenues: () => void;
 };
 
 export type MenuDashboardProps = {
-    venueId: string;
+    venueId: number;
     venueName: string;
     onBackToVenues: () => void;
 };
