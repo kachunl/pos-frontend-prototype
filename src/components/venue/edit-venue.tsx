@@ -1,6 +1,6 @@
 import '../../styles/components/venue/edit-venue.css'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { EditVenueProps } from '../../utils/types'
 import VenueItem from './venue-item'
 import AddVenueItem from './add-venue'
@@ -10,6 +10,10 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
     const [isEditing, setIsEditing] = useState(false)
     const [editingVenueId, setEditingVenueId] = useState<number | null>(null)
     const [removingVenueId, setRemovingVenueId] = useState<number | null>(null)
+
+    console.log('Rendering EditVenue with venues:', venues);
+    console.log('Venue IDs:', venues.map(venue => venue.id));
+    console.log('Venue data:', venues);
 
     const handleRemove = (id: number) => {
         setRemovingVenueId(id)
@@ -22,6 +26,10 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
         }
     }
 
+    useEffect(() => {
+        console.log('Venue IDs:', venues.map(venue => venue.id));
+    }, [venues]);
+
     return (
         <div className="edit-venue-container">
 
@@ -33,9 +41,11 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
             </div>
 
             <div className="edit-venue-grid">
-                {venues.map((venue) => (
+                {venues.map((venue, index) => (
+                /* {venues.map(venue => ( */
                     <VenueItem
-                        key={venue.id}
+                        // key={venue.id}
+                        key={`venue-${venue.id}-${index}`}
                         venue={venue}
                         isEditing={isEditing}
                         onEdit={() => setEditingVenueId(venue.id)}
@@ -45,7 +55,8 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
                 ))}
 
                 {isEditing && (
-                    <button className="edit-venue-add-button" onClick={() => setEditingVenueId(-1)}>
+                    <button         key="add-venue-button"  // Add this
+                    className="edit-venue-add-button" onClick={() => setEditingVenueId(-1)}>
                         +
                     </button>
                 )}

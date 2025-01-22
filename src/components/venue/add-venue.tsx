@@ -21,17 +21,17 @@ const AddVenueItem = ({ onSubmit, onCancel, initialVenue }: AddVenueItemProps) =
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-            const newVenue: Omit<VenueData, "id"> = {
+        const newVenue: Omit<VenueData, "id"> = {
             name,
             description,
             is_active: isActive,
-            banner_url: bannerUrl || "/placeholder",
+            banner_url: bannerUrl || "",
         }
 
         onSubmit(newVenue)
     }
 
-  return (
+    return (
         <form onSubmit={handleSubmit} className="add-venue-item-form">
             <div className="add-venue-item-form-group">
                 <label htmlFor="name" className="add-venue-item-label">

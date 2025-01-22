@@ -1,4 +1,5 @@
 import { VenueData } from "../utils/types";
+import { UnformattedVenueData } from "../utils/types";
 
 const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/venues`;
 
@@ -43,7 +44,8 @@ const VenueService = {
         }
     },
 
-    updateVenue: async (id: number, data: Partial<VenueData>): Promise<VenueData> => {
+    updateVenue: async (id: number, data: Omit<VenueData, "id">): Promise<UnformattedVenueData> => {
+    // updateVenue: async (id: number, data: Partial<VenueData>): Promise<VenueData> => {
         try {
             const response = await fetch(`${BASE_URL}/${id}`, {
                 method: "PATCH",
@@ -92,7 +94,7 @@ const VenueService = {
         }
     },
 
-    createVenue: async (data: Omit<VenueData, "id">): Promise<VenueData> => {
+    createVenue: async (data: Omit<VenueData, "id">): Promise<UnformattedVenueData> => {
         try {
             const response = await fetch(`${BASE_URL}`, {
                 method: "POST",
