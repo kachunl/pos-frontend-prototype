@@ -86,3 +86,13 @@ export type VenueItemProps = {
 export type VenueOverviewProps = {
     onVenueSelect: (venue: VenueData) => void;
 };
+
+export type UnformattedVenueData = {
+    venue: {
+        id: number;
+        name: string;
+        description: string;
+        is_active: boolean;
+        banner_url?: string;
+    };
+};
