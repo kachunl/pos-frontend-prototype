@@ -140,15 +140,6 @@ const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps)
     };
 
     const handleEditItem = async (editedItem: MenuItemData) => {
-        console.log(menuItems);
-        console.log('Editing item:', editedItem);
-        console.log("Editing item details:", JSON.stringify(editedItem, null, 2));
-
-        if (!editedItem.id) {
-            console.error("Cannot update item: ID is missing");
-            return;
-        }
-
         try {
             const response = await MenuService.updateMenuItem(editedItem.id, {
                 name: editedItem.name,
@@ -160,8 +151,6 @@ const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps)
                 position: editedItem.position,
                 modifiers: editedItem.modifiers
             });
-
-            console.log("response",response)
             
             const formattedMenuItem: MenuItemData = {
                 id: response.item.id,
@@ -174,8 +163,6 @@ const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps)
                 position: response.item.position,
                 modifiers: response.item.modifiers
             };
-
-            console.log("FORMATTED LOOK",formattedMenuItem);
         
             setMenuItems(
                 menuItems.map((item) =>
