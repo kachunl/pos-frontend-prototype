@@ -1,14 +1,34 @@
 // menu
+// export type MenuItemData = {
+//     id: number;
+//     name: string
+//     description: string
+//     category: string
+//     price: number
+//     is_available: boolean
+//     image_url: string
+//     position: number
+//     modifiers: Modifier[]
+// };
 export type MenuItemData = {
-    name: string
-    description: string
-    category: string
-    price: number
-    is_available: boolean
-    image_url: string
-    position: number
-    modifiers: Modifier[]
-};
+    id: number;  // Changed from number to string
+    name: string;
+    description: string;
+    category: string;
+    price: number;
+    is_available: boolean;
+    image_url: string;
+    position: number;
+    modifiers: Array<{
+        name: string;
+        min_choices: number;
+        max_choices: number;
+        choices: Array<{
+            name: string;
+            price: number;
+        }>;
+    }>;
+}
 
 export type ModifierChoice = {
     name: string
@@ -24,7 +44,7 @@ export type Modifier = {
 
 export type EditMenuProps = {
     menuItems: MenuItemData[];
-    onRemoveItem: (id: string) => void;
+    onRemoveItem: (id: number) => void;
     onAddItem: (item: MenuItemData) => void;
     onEditItem: (item: MenuItemData) => void;
     venueName: string;
@@ -69,12 +89,46 @@ export type MenuDashboardProps = {
 };
 
 export type UnformattedMenuData = {
-    menu: {
+    items: {
         id: number;
         name: string;
         description: string;
-        is_active: boolean;
-        banner_url?: string;
+        category: string;
+        price: number;
+        is_available: boolean;
+        image_url: string;
+        position: number;
+        modifiers: Array<{
+            name: string;
+            min_choices: number;
+            max_choices: number;
+            choices: Array<{
+                name: string;
+                price: number;
+            }>;
+        }>;
+    };
+};
+
+export type UnformattedMenuDataForUpdate = {
+    item: {
+        id: number;
+        name: string;
+        description: string;
+        category: string;
+        price: number;
+        is_available: boolean;
+        image_url: string;
+        position: number;
+        modifiers: Array<{
+            name: string;
+            min_choices: number;
+            max_choices: number;
+            choices: Array<{
+                name: string;
+                price: number;
+            }>;
+        }>;
     };
 };
 

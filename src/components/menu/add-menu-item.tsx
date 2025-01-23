@@ -7,6 +7,7 @@ import { AddMenuItemProps } from '../../utils/types'
 import { X } from 'lucide-react'
 
 const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
+    const [id, setId] = useState(initialItem?.id || 0)
     const [name, setName] = useState(initialItem?.name || "")
     const [description, setDescription] = useState(initialItem?.description || "")
     const [category, setCategory] = useState(initialItem?.category || "")
@@ -18,6 +19,7 @@ const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
 
     useEffect(() => {
         if (initialItem) {
+            setId(initialItem.id),
             setName(initialItem.name)
             setDescription(initialItem.description)
             setCategory(initialItem.category)
@@ -33,6 +35,7 @@ const AddMenuItem = ({ onSubmit, onCancel, initialItem }: AddMenuItemProps) => {
         e.preventDefault()
 
         const newItem: MenuItemData = {
+            id,
             name,
             description,
             category,

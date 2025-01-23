@@ -92,6 +92,7 @@ const VenueOverview = ({ onVenueSelect }: VenueOverviewProps) => {
     };
 
     const handleEditVenue = async (editedVenue: VenueData) => {
+        console.log("VEh",editedVenue)
         try {
             const response = await VenueService.updateVenue(editedVenue.id, {
                 name: editedVenue.name,

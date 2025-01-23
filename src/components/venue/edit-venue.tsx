@@ -17,14 +17,14 @@ const EditVenue = ({ venues, onRemoveVenue, onAddVenue, onEditVenue, onVenueClic
 
     const handleRemove = (id: number) => {
         setRemovingVenueId(id)
-    }
+    };
 
     const confirmRemove = () => {
         if (removingVenueId !== null) {
             onRemoveVenue(removingVenueId)
             setRemovingVenueId(null)
         }
-    }
+    };
 
     useEffect(() => {
         console.log('Venue IDs:', venues.map(venue => venue.id));

@@ -17,7 +17,7 @@ const AddVenueItem = ({ onSubmit, onCancel, initialVenue }: AddVenueItemProps) =
             setIsActive(initialVenue.is_active)
             setBannerUrl(initialVenue.banner_url)
         }
-    }, [initialVenue])
+    }, [initialVenue]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -29,7 +29,7 @@ const AddVenueItem = ({ onSubmit, onCancel, initialVenue }: AddVenueItemProps) =
         }
 
         onSubmit(newVenue)
-    }
+    };
 
     return (
         <form onSubmit={handleSubmit} className="add-venue-item-form">
