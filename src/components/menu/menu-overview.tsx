@@ -108,21 +108,21 @@ const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps)
     }, [venueId]);
 
     const handleRemoveItem = async (itemId: number) => {
-        // try {
-        //     await MenuService.deleteMenuItem(venueId, itemId);
+        try {
+            await MenuService.deleteMenuItem(itemId);
 
-        //     setMenuItems(prevItems => prevItems.filter(item => item.id !== itemId));
-        // } 
+            setMenuItems(prevItems => prevItems.filter(item => item.id !== itemId));
+        } 
         
-        // catch (error) {
-        //     if (error instanceof Error) {
-        //         setError(error.message);
-        //     } 
+        catch (error) {
+            if (error instanceof Error) {
+                setError(error.message);
+            } 
 
-        //     else {
-        //         setError("Failed to fetch venues");
-        //     }
-        // }
+            else {
+                setError("Failed to fetch venues");
+            }
+        }
     };
 
     const handleAddItem = async (newItem: Omit<MenuItemData, "id">) => {

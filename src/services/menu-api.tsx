@@ -67,23 +67,23 @@ const MenuService = {
         }
     },
 
-    deleteMenuItem: async (venueId: number, menuItemId: number) => {
-        // try {
-        //     const response = await fetch(`${BASE_URL}/${venueId}/items/${menuItemId}`, {
-        //         method: "DELETE",
-        //     });
+    deleteMenuItem: async (menuItemId: number) => {
+        try {
+            const response = await fetch(`${MENU_BASE_URL}/${menuItemId}`, {
+                method: "DELETE",
+            });
 
-        //     if (!response.ok) {
-        //         throw new Error("Failed to delete menu item");
-        //     }
+            if (!response.ok) {
+                throw new Error("Failed to delete menu item");
+            }
 
-        //     return await response.json();
-        // }
+            return await response.json();
+        }
         
-        // catch (error) {
-        //     console.error("Error deleting menu item:", error);
-        //     throw error;
-        // }
+        catch (error) {
+            console.error("Error deleting menu item:", error);
+            throw error;
+        }
     },
 
     createMenuItem: async (venueId: number, menuItem: Omit<MenuItemData, "id">) => {

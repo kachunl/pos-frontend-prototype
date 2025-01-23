@@ -10,8 +10,8 @@ import RemoveConfirmModal from '../modal/remove-confirm-modal'
 
 const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem, venueName }: EditMenuProps) => {
     const [isEditing, setIsEditing] = useState(false)
-    const [editingItemName, setEditingItemName] = useState<string | null>(null)
-    const [removingItemName, setRemovingItemName] = useState<string | null>(null)
+    const [editingItemId, setEditingItemId] = useState<number | null>(null)
+    const [removingItemId, setRemovingItemId] = useState<number | null>(null)
     const [selectedItem, setSelectedItem] = useState<MenuItemData | null>(null)
 
     const sortedAndGroupedItems = useMemo(() => {
@@ -30,14 +30,14 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem, venueName }:
         )
     }, [menuItems]);
 
-    const handleRemove = (name: string) => {
-        setRemovingItemName(name)
+    const handleRemove = (id: number) => {
+        setRemovingItemId(id)
     };
     
     const confirmRemove = () => {
-        if (removingItemName) {
-          onRemoveItem(removingItemName)
-          setRemovingItemName(null)
+        if (removingItemId) {
+          onRemoveItem(removingItemId)
+          setRemovingItemId(null)
         }
     };
     
@@ -66,8 +66,8 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem, venueName }:
                                     key={item.name}
                                     item={item}
                                     isEditing={isEditing}
-                                    onEdit={() => setEditingItemName(item.name)}
-                                    onRemove={() => handleRemove(item.name)}
+                                    onEdit={() => setEditingItemId(item.id)}
+                                    onRemove={() => handleRemove(item.id)}
                                     onClick={() => handleItemClick(item)}
                                 />
                             ))}
@@ -77,27 +77,27 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem, venueName }:
             </div>
 
             {isEditing && (
-                <button onClick={() => setEditingItemName("new")} className="edit-menu-add-button">
+                <button onClick={() => setEditingItemId(null)} className="edit-menu-add-button">
                     <Plus size={24} className="edit-menu-add-icon" />
                     <span className="edit-menu-add-text">Add Menu Item</span>
                 </button>
             )}
-            {editingItemName && (
+            {editingItemId && (
                 <div className="edit-menu-modal">
                     <div className="edit-menu-modal-content">
                         <AddMenuItem
                             onSubmit={(newItem) => {
-                                if (editingItemName === "new") {
+                                if (editingItemId === null) {
                                     onAddItem(newItem)
                                 }
                                 else {
                                     onEditItem(newItem)
                                 }
-                                setEditingItemName(null)
+                                setEditingItemId(null)
                             }}
-                            onCancel={() => setEditingItemName(null)}
+                            onCancel={() => setEditingItemId(null)}
                             initialItem={
-                                editingItemName !== "new" ? menuItems.find((item) => item.name === editingItemName) : undefined
+                                editingItemId !== null ? menuItems.find((item) => item.id === editingItemId) : undefined
                             }
                         />
                     </div>
@@ -155,9 +155,9 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem, venueName }:
             )}
 
             <RemoveConfirmModal
-                isOpen={removingItemName !== null}
+                isOpen={removingItemId !== null}
                 onConfirm={confirmRemove}
-                onCancel={() => setRemovingItemName(null)}
+                onCancel={() => setRemovingItemId(null)}
                 title="Remove Menu Item"
                 message="Are you sure you want to remove this menu item? This action cannot be undone."
             />
