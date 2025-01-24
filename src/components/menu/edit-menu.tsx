@@ -77,27 +77,28 @@ const EditMenu = ({ menuItems, onRemoveItem, onAddItem, onEditItem, venueName }:
             </div>
 
             {isEditing && (
-                <button onClick={() => setEditingItemId(null)} className="edit-menu-add-button">
+                <button onClick={() => setEditingItemId(-1)} className="edit-menu-add-button">
                     <Plus size={24} className="edit-menu-add-icon" />
                     <span className="edit-menu-add-text">Add Menu Item</span>
                 </button>
             )}
-            {editingItemId && (
+            {editingItemId !== null && (
                 <div className="edit-menu-modal">
                     <div className="edit-menu-modal-content">
                         <AddMenuItem
                             onSubmit={(newItem) => {
-                                if (editingItemId === null) {
+                                if (editingItemId === -1) {
                                     onAddItem(newItem)
                                 }
                                 else {
-                                    onEditItem(newItem)
+                                    onEditItem({ ...newItem, id: editingItemId })
+
                                 }
                                 setEditingItemId(null)
                             }}
                             onCancel={() => setEditingItemId(null)}
                             initialItem={
-                                editingItemId !== null ? menuItems.find((item) => item.id === editingItemId) : undefined
+                                editingItemId !== -1 ? menuItems.find((item) => item.id === editingItemId) : undefined
                             }
                         />
                     </div>

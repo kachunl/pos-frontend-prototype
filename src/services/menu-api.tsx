@@ -1,5 +1,5 @@
 import { MenuItemData } from '../utils/types';
-import { UnformattedMenuDataForUpdate } from '../utils/types';
+import { UnformattedMenuDataForItem } from '../utils/types';
 
 const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/venues`;
 const MENU_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/items`;
@@ -44,7 +44,7 @@ const MenuService = {
         // }
     },
 
-    updateMenuItem: async (menuItemId: number, menuItem: Omit<MenuItemData, "id">): Promise<UnformattedMenuDataForUpdate> => {
+    updateMenuItem: async (menuItemId: number, menuItem: Omit<MenuItemData, "id">): Promise<UnformattedMenuDataForItem> => {
         try {
             const response = await fetch(`${MENU_BASE_URL}/${menuItemId}`, {
                 method: "PATCH",
@@ -86,27 +86,28 @@ const MenuService = {
         }
     },
 
-    createMenuItem: async (venueId: number, menuItem: Omit<MenuItemData, "id">) => {
-        // try {
-        //     const response = await fetch(`${BASE_URL}/${venueId}/items`, {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(menuItem),
-        //     });
+    createMenuItem: async (venueId: number, menuItem: Omit<MenuItemData, "id">): Promise<UnformattedMenuDataForItem> => {
+        console.log("API", menuItem)
+        try {
+            const response = await fetch(`${BASE_URL}/${venueId}/items`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(menuItem),
+            });
 
-        //     if (!response.ok) {
-        //         throw new Error("Failed to create menu item");
-        //     }
+            if (!response.ok) {
+                throw new Error("Failed to create menu item");
+            }
 
-        //     return await response.json();
-        // } 
+            return await response.json();
+        } 
         
-        // catch (error) {
-        //     console.error("Error creating menu item:", error);
-        //     throw error;
-        // }
+        catch (error) {
+            console.error("Error creating menu item:", error);
+            throw error;
+        }
     },
 
     getMenuItemsByCategory: async (venueId: number, category: string) => {

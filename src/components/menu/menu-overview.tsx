@@ -3,48 +3,12 @@ import '../../styles/components/menu/menu-overview.css'
 import { useState, useEffect } from 'react'
 import { MenuItemData } from '../../utils/types'
 import { MenuOverviewProps } from '../../utils/types'
+import { UnformattedMenuData } from '../../utils/types'
 
 import EditMenu from './edit-menu'
 import MenuHeader from './menu-header'
 
 import MenuService from '../../services/menu-api'
-
-//========================================================================================================
-// const sampleMenuItems: MenuItemData[] = [
-//     {
-//         name: "Pad Krapow (1kg)",
-//         description: "Thai classic",
-//         category: "rice",
-//         price: 1200,
-//         is_available: true,
-//         image_url: "/placeholder",
-//         position: 2,
-//         modifiers: [
-//             {
-//                 name: "Spice Level",
-//                 min_choices: 0,
-//                 max_choices: 4,
-//                 choices: [
-//                     { name: "Less spice", price: 0 },
-//                     { name: "Medium spice", price: 0 },
-//                     { name: "More spice", price: 0 },
-//                     { name: "Mega spice", price: 1 },
-//                 ],
-//             },
-//         ],
-//     },
-//     {
-//         name: "Pink Milk",
-//         description: "Pink Sweet Milk",
-//         category: "drink",
-//         price: 999,
-//         is_available: true,
-//         image_url: "/placeholder",
-//         position: 1,
-//         modifiers: [],
-//     },
-// ]
-//========================================================================================================
 
 const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps) => {
     const [menuItems, setMenuItems] = useState<MenuItemData[]>([]);
@@ -126,17 +90,44 @@ const MenuOverview = ({ venueId, venueName, onBackToVenues }: MenuOverviewProps)
     };
 
     const handleAddItem = async (newItem: Omit<MenuItemData, "id">) => {
-        // try {
-        //     const response = await MenuService.createMenuItem(venueId, newItem);
+        console.log(newItem);
+        console.log("Payload being sent:", JSON.stringify(newItem, null, 2))
 
-        //     setMenuItems(prevItems => [...prevItems, response]);
-        // } 
-        
-        // catch (error) {
-        //     if (error instanceof Error) {
-        //         setError(error.message);
-        //     }
-        // }
+        try {
+            const response = await MenuService.createMenuItem(venueId, {
+                name: newItem.name,
+                description: newItem.description,
+                category: newItem.category,
+                price: newItem.price,
+                is_available: newItem.is_available,
+                image_url: newItem.image_url || "",
+                position: newItem.position,
+                modifiers: newItem.modifiers || []
+            });
+
+            console.log(response)
+            console.log(response.item)
+
+            const formattedMenuItem: MenuItemData = {
+                id: response.item.id,
+                name: response.item.name,
+                description: response.item.description,
+                category: response.item.category,
+                price: response.item.price,
+                is_available: response.item.is_available,
+                image_url: response.item.image_url || "",
+                position: response.item.position,
+                modifiers: response.item.modifiers || []
+            };
+
+            setMenuItems([...menuItems, formattedMenuItem]);
+        } 
+
+        catch (error) {
+            if (error instanceof Error) {
+                setError(error.message);
+            }
+        }
     };
 
     const handleEditItem = async (editedItem: MenuItemData) => {
