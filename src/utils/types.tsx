@@ -1,17 +1,5 @@
-// menu
-// export type MenuItemData = {
-//     id: number;
-//     name: string
-//     description: string
-//     category: string
-//     price: number
-//     is_available: boolean
-//     image_url: string
-//     position: number
-//     modifiers: Modifier[]
-// };
 export type MenuItemData = {
-    id: number;  // Changed from number to string
+    id: number;
     name: string;
     description: string;
     category: string;
@@ -30,11 +18,6 @@ export type MenuItemData = {
     }>;
 }
 
-export type ModifierChoice = {
-    name: string
-    price: number
-};
-  
 export type Modifier = {
     name: string
     min_choices: number
@@ -42,16 +25,21 @@ export type Modifier = {
     choices: ModifierChoice[]
 };
 
+export type ModifierChoice = {
+    name: string
+    price: number
+};
+
 export type EditMenuProps = {
     menuItems: MenuItemData[];
     onRemoveItem: (id: number) => void;
-    onAddItem: (item: MenuItemData) => void;
+    onAddItem: (item: Omit<MenuItemData, "id">) => void;
     onEditItem: (item: MenuItemData) => void;
     venueName: string;
 };
 
 export type AddMenuItemProps = {
-    onSubmit: (item: MenuItemData) => void;
+    onSubmit: (item: Omit<MenuItemData, "id">) => void
     onCancel: () => void;
     initialItem?: MenuItemData;
 };
@@ -110,7 +98,7 @@ export type UnformattedMenuData = {
     };
 };
 
-export type UnformattedMenuDataForUpdate = {
+export type UnformattedMenuDataForItem = {
     item: {
         id: number;
         name: string;
