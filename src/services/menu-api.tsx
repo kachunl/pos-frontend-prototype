@@ -3,8 +3,8 @@ import { UnformattedMenuDataForItem } from "../utils/types";
 import { UploadResponse } from "../utils/types";
 
 const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`;
-const VENUE_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/venues`;
-const MENU_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/items`;
+const VENUE_BASE_URL = `${BASE_URL}/venues`;
+const MENU_BASE_URL = `${BASE_URL}/items`;
 
 const MenuService = {
   getAllMenuItems: async (venueId: number) => {
@@ -17,8 +17,6 @@ const MenuService = {
       }
 
       const json = await response.json();
-      console.log("SERVICE", json);
-      console.log("SERVICE 222", json.items);
       return json.items;
     } catch (error) {
       console.error("Error fetching menu items:", error);
@@ -86,7 +84,6 @@ const MenuService = {
     venueId: number,
     menuItem: Omit<MenuItemData, "id">,
   ): Promise<UnformattedMenuDataForItem> => {
-    console.log("API", menuItem);
     try {
       const response = await fetch(`${VENUE_BASE_URL}/${venueId}/items`, {
         method: "POST",
@@ -131,8 +128,6 @@ const MenuService = {
         body: formData,
       });
 
-      console.log(response);
-
       if (!response.ok) {
         throw new Error("Image upload failed");
       }
@@ -140,7 +135,6 @@ const MenuService = {
       const data: UploadResponse = await response.json();
 
       return data.upload.url;
-      //return await response.json();
     } catch (error) {
       console.error("Error uploading menu image:", error);
       throw error;

@@ -3,7 +3,6 @@ import "../../styles/components/menu/menu-overview.css";
 import { useState, useEffect } from "react";
 import { MenuItemData } from "../../utils/types";
 import { MenuOverviewProps } from "../../utils/types";
-import { UnformattedMenuData } from "../../utils/types";
 
 import EditMenu from "./edit-menu";
 import MenuHeader from "./menu-header";
@@ -18,24 +17,11 @@ const MenuOverview = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // const handleRemoveItem = (name: string) => {
-  //     setMenuItems(menuItems.filter(item => item.name !== name));
-  // };
-
-  // const handleAddItem = (newItem: MenuItemData) => {
-  //     setMenuItems([...menuItems, newItem]);
-  // };
-
-  // const handleEditItem = (editedItem: MenuItemData) => {
-  //     setMenuItems(menuItems.map(item => item.name === editedItem.name ? editedItem : item));
-  // };
-
   const fetchMenuItems = async () => {
     setLoading(true);
     setError(null);
     try {
       const data = await MenuService.getAllMenuItems(venueId);
-      console.log("Raw API Response:", data);
 
       const formattedMenuItems = data.map((item: MenuItemData) => ({
         id: item.id,
@@ -48,8 +34,6 @@ const MenuOverview = ({
         position: item.position,
         modifiers: item.modifiers || [],
       }));
-
-      console.log("LOOK HERE", formattedMenuItems);
 
       setMenuItems(formattedMenuItems);
     } catch (error) {
@@ -85,9 +69,6 @@ const MenuOverview = ({
   };
 
   const handleAddItem = async (newItem: Omit<MenuItemData, "id">) => {
-    console.log(newItem);
-    console.log("Payload being sent:", JSON.stringify(newItem, null, 2));
-
     try {
       const response = await MenuService.createMenuItem(venueId, {
         name: newItem.name,
@@ -99,9 +80,6 @@ const MenuOverview = ({
         position: newItem.position,
         modifiers: newItem.modifiers || [],
       });
-
-      console.log(response);
-      console.log(response.item);
 
       const formattedMenuItem: MenuItemData = {
         id: response.item.id,
